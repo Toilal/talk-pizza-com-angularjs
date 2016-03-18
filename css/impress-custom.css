@@ -1,0 +1,33 @@
+.slide#title h1 {
+    font-size: 100px;
+    line-height: 150%;
+    text-align: center;
+}
+
+.slide#title h2 {
+    font-size: 35px;
+    line-height: 150%;
+    text-align: center;
+}
+
+.vertical-center {
+    padding: 12px;
+
+    position: absolute;
+    top:45%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    margin: auto;
+}
+
+.slide {
+    position: relative;
+}
+
+.slide .footer {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}

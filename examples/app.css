@@ -10,3 +10,29 @@
 .component-selected.hidden {
     border-color: #cccccc;
 }
+
+.github-table-container {
+    overflow: auto;
+    width: 100%;
+    height: 550px;
+}
+
+.github-table {
+    font-size: 18px;
+}
+
+.github-table th {
+    text-align: left;
+}
+
+.github-table .name {
+    width: 600px;
+}
+
+.github-table .stars {
+    width: 15%;
+}
+
+.github-table .forks {
+    width: 15%;
+}

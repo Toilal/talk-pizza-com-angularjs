@@ -36,6 +36,7 @@
     <script src="js/highlight.pack.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
 
+    <link href="css/angular-tooltips.css" rel="stylesheet">
     <link href="examples/app.css" rel="stylesheet">
 
     <link rel="shortcut icon" href="favicon.png" />
@@ -180,7 +181,7 @@ render: function () {
         <iframe src="http://todomvc.com/examples/jquery"></iframe>
     </div>
 
-    <div id="jquery-mais-non" class="step slide" data-x="0" data-y="0">
+    <div id="mais-jquery" class="step slide" data-x="0" data-y="0">
         <h1 class="title">Mais JQuery ...</h1>
         <ul>
             <li>N'aide pas à structurer le code</li>
@@ -383,6 +384,26 @@ render: function () {
         </div>
     </div>
 
+    <div id="services-factories-providers" class="step slide" data-x="-1000" data-y="3200">
+        <h1 class="title">Services, Factories et Providers</h1>
+        <h2>Composants utilisables via l'injection de dépendance</h2>
+
+        <ul>
+            <li>Ces concepts permettent de palier à l'absence de classes en JavaScript</li>
+            <li>Equivalent Spring/Jersey en Java</li>
+            <li>Structure fortemment le code en séparant les responsabilités</li>
+            <li>Permet le remplacement des implémentations par des mocks pour les tests (angular-mocks)</li>
+        </ul>
+
+    </div>
+
+    <div id="services-factories-providers-2" class="step slide" data-x="0" data-y="3200">
+        <h1 class="title">Exemple Github Repos</h1>
+
+        <github-repos></github-repos>
+
+    </div>
+
     <!--
 
         So to summarize of all the possible attributes used to position presentation steps, we have:
@@ -453,6 +474,7 @@ render: function () {
 
 -->
 <script src="js/angular.js"></script>
+<script src="js/angular-tooltips.js"></script>
 <script src="examples/app.js"></script>
 
 <script src="js/impress-progress.js"></script>

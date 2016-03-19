@@ -1,0 +1,25 @@
+<div class="github-repos">
+    <div class="github-title">
+        <button class="bigger" ng-click="ctrl.refresh()" ng-disabled="ctrl.refreshing"><i class="fa fa-refresh"></i></button>
+        <span ng-if="ctrl.user">{{ctrl.user.name}} (<a href="{{ctrl.user.html_url}}" target="_blank">{{ctrl.user.login}}</a>)</span>
+        <span class="small">Limite: {{ctrl.rate.limit}}</span>
+        <span class="small">Restant: {{ctrl.rate.remaining}}</span>
+        <i class="bigger fa fa-spinner" ng-if="ctrl.refreshing"></i>
+    </div>
+    <div class="github-table-container">
+        <table class="github-table">
+            <thead>
+            <th class="name">Name</th>
+            <th class="stars">Stars</th>
+            <th class="forks">Forks</th>
+            </thead>
+            <tbody>
+            <tr ng-repeat="repo in ctrl.repos | orderBy:'-stargazers_count' | filter:{fork:false}">
+                <td class="name" tooltips tooltip-side="'left'" tooltip-template="{{repo.description}}"><a href="{{repo.html_url}}" target="_blank">{{repo.full_name}}</a></td>
+                <td class="stars">{{repo.stargazers_count}}</td>
+                <td class="forks">{{repo.forks_count}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

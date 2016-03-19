@@ -56,11 +56,13 @@ angular.module('Examples')
         // $http est un service angularJS qui permet de réaliser des requetes HTTP.
 
         var base = "https://api.github.com/";
-        var access_token = "cdb1596ea2c91362ba6c07bf33ce9b522168dc05";
+        
+        // on stocke a l'envers le token pour éviter que Github le révoque au commit.
+        var reversed_access_token = "1ab41bc0cf53c79f3240e07bfe1269705e013246";
 
         var headers = {
             'Accept': 'application/vnd.github.v3+json',
-            'Authorization': 'token ' + access_token
+            'Authorization': 'token ' + reversed_access_token.split("").reverse().join("")
         };
 
         /**

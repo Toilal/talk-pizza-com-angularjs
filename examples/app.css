@@ -1,0 +1,12 @@
+.reset-input-container {
+    width: 100%;
+    padding: 10px;
+}
+
+.component-selected {
+    border: solid 3px #6388cd;
+}
+
+.component-selected.hidden {
+    border-color: #cccccc;
+}

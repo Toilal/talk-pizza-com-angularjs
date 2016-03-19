@@ -54,9 +54,6 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
     display: block;
 }
-body {
-    line-height: 1;
-}
 ol, ul {
     list-style: none;
 }
@@ -138,7 +135,6 @@ a:focus {
 
 .fallback-message {
     font-family: sans-serif;
-    line-height: 1.3;
 
     width: 780px;
     padding: 10px 10px 0;
@@ -177,7 +173,6 @@ a:focus {
 
     font-family: 'PT Serif', georgia, serif;
     font-size: 48px;
-    line-height: 1.5;
 }
 
 /*
@@ -223,7 +218,7 @@ a:focus {
 
     font-family: 'Open Sans', Arial, sans-serif;
     font-size: 30px;
-    line-height: 36px;
+
     letter-spacing: -1px;
 }
 

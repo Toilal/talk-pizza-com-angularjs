@@ -1,78 +1,17 @@
 <!doctype html>
-
-<!--
-
-    Welcome to the light side of the source, young padawan.
-
-    One step closer to learn something interesting you are...
-
-                               ____
-                            _.' :  `._
-                        .-.'`.  ;   .'`.-.
-               __      / : ___\ ;  /___ ; \      __
-             ,'_ ""=-.:__;".-.";: :".-.":__;.-="" _`,
-             :' `.t""=-.. '<@.`;_  ',@:` ..-=""j.' `;
-                  `:-.._J '-.-'L__ `-.-' L_..-;'
-                    "-.__ ;  .-"  "-.  : __.-"
-                        L ' /.======.\ ' J
-                         "-.   "__"   .-"
-                        __.l"-:_JL_;-";.__
-                     .-j/'.;  ;""""  / .'\"-.
-                   .' /:`. "-.:     .-" .';  `.
-                .-"  / ;  "-. "-..-" .-"  :    "-.
-             .+"-.  : :      "-.__.-"      ;-._   \
-             ; \  `.; ;                    : : "+. ;
-             :  ;   ; ;                    : ;  : \:
-             ;  :   ; :                    ;:   ;  :
-            : \  ;  :  ;                  : ;  /  ::
-            ;  ; :   ; :                  ;   :   ;:
-            :  :  ;  :  ;                : :  ;  : ;
-            ;\    :   ; :                ; ;     ; ;
-            : `."-;   :  ;              :  ;    /  ;
-             ;    -:   ; :              ;  : .-"   :
-             :\     \  :  ;            : \.-"      :
-              ;`.    \  ; :            ;.'_..-=  / ;
-              :  "-.  "-:  ;          :/."      .'  :
-               \         \ :          ;/  __        :
-                \       .-`.\        /t-""  ":-+.   :
-                 `.  .-"    `l    __/ /`. :  ; ; \  ;
-                   \   .-" .-"-.-"  .' .'j \  /   ;/
-                    \ / .-"   /.     .'.' ;_:'    ;
-                     :-""-.`./-.'     /    `.___.'
-                           \ `t  ._  /
-                            "-.t-._:'
-
--->
-
-<!--
-
-    So you'd like to know how to use impress.js?
-
-    You've made the first, very important step - you're reading the source code.
-    And that's how impress.js presentations are built - with HTML and CSS code.
-
-    Believe me, you need quite decent HTML and CSS skills to be able to use impress.js effectively.
-    More importantly, you need to be a designer. There are no default styles or layouts for impress.js presentations.
-
-    You need to design and build it by hand.
-
-    So...
-
-    Would you still like to know how to use impress.js?
-
--->
-
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=1024" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <title>impress.js | presentation tool based on the power of CSS3 transforms and transitions in modern browsers | by Bartek Szopka @bartaz</title>
+    <title>AngularJS | Retour d'expérience sur le plus populaire des frameworks web | Rémi Alvergnat @Toilal</title>
 
-    <meta name="description" content="impress.js is a presentation tool based on the power of CSS3 transforms and transitions in modern browsers and inspired by the idea behind prezi.com." />
-    <meta name="author" content="Bartek Szopka" />
+    <meta name="description" content="Retour d'expérience sur le plus populaire des frameworks web" />
+    <meta name="author" content="Rémi Alvergnat" />
 
-    <link href="http://fonts.googleapis.com/css?family=Open+Sans:regular,semibold,italic,italicsemibold|PT+Sans:400,700,400italic,700italic|PT+Serif:400,700,400italic,700italic" rel="stylesheet" />
+    <link href="css/font-custom.css" rel="stylesheet" />
+    <!-- http://fonts.googleapis.com/css?family=Open+Sans:regular,semibold,italic,italicsemibold|PT+Sans:400,700,400italic,700italic|PT+Serif:400,700,400italic,700italic -->
+
 
     <!--
 
@@ -93,6 +32,11 @@
     <link href="css/impress.css" rel="stylesheet" />
     <link href="css/impress-progress.css" rel="stylesheet" />
     <link href="css/impress-custom.css" rel="stylesheet" />
+    <link href="css/highlight/idea.css" rel="stylesheet">
+    <script src="js/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link href="examples/app.css" rel="stylesheet">
 
     <link rel="shortcut icon" href="favicon.png" />
     <link rel="apple-touch-icon" href="apple-touch-icon.png" />
@@ -116,7 +60,7 @@
     it can be found later, when `hint` element is being described.
 
 -->
-<body class="impress-not-supported">
+<body class="impress-not-supported" ng-app="Examples">
 
 <!--
     For example this fallback message is only visible when there is `impress-not-supported` class on body.
@@ -169,9 +113,9 @@
         It will not be rotated or scaled.
 
     -->
-    <div id="title" class="step slide" data-x="-1000" data-y="-1500">
-        <img src="img/AngularJS_logo.svg">
-        <h2 class="vertical-center">Retour d'expérience sur le plus populaire des frameworks web</h2>
+    <div id="title" class="step slide" data-x="0" data-y="-1600">
+        <img class="title" src="img/AngularJS_logo.svg">
+        <h2 class="subtitle vertical-center">Retour d'expérience sur le plus populaire des frameworks web</h2>
 
         <div class="footer">
             <ul>
@@ -179,6 +123,263 @@
                 <li><i class="fa fa-github"></i> <a href="https://github.com/Toilal">Toilal</a></li>
                 <li><i class="fa fa-linkedin"></i> <a href="https://fr.linkedin.com/in/remialvergnat">remi.alvergnat</a></li>
             </ul>
+        </div>
+    </div>
+
+    <div id="jquery-html" class="step slide" data-x="-1000" data-y="-800">
+        <h1 class="title">Avant, on avait JQuery</h1>
+        <h2>Avec un peu de HTML ...</h2>
+        <div class="lang">html</div>
+        <pre><code class="html bigger">&lt;header id=&quot;header&quot;&gt;
+  &lt;h1&gt;todos&lt;/h1&gt;
+  &lt;input id=&quot;new-todo&quot;
+         placeholder=&quot;What needs to be done?&quot;
+         autofocus&gt;
+&lt;/header&gt;
+&lt;section id=&quot;main&quot;&gt;
+  &lt;input id=&quot;toggle-all&quot; type=&quot;checkbox&quot;&gt;
+  &lt;label for=&quot;toggle-all&quot;&gt;
+    Mark all as complete
+  &lt;/label&gt;
+  &lt;ul id=&quot;todo-list&quot;&gt;&lt;/ul&gt;
+&lt;/section&gt;</code></pre>
+    </div>
+
+    <div id="jquery-js" class="step slide" data-x="0" data-y="-800">
+        <h1 class="title">Avant, on avait JQuery</h1>
+        <h2>... et beaucoup de JavaScript ...</h2>
+        <div class="lang">javascript</div>
+        <pre><code class="js small">this.todos = [];
+bindEvents: function () {
+    $('#new-todo').on('keyup', this.create.bind(this));
+},
+create: function (e) {
+    var $input = $(e.target);
+    var val = $input.val().trim();
+
+    if (e.which !== ENTER_KEY || !val) {
+        return;
+    }
+
+    this.todos.push({
+        id: util.uuid(),
+        title: val,
+        completed: false
+    });
+
+    this.render();
+},
+render: function () {
+    $('#todo-list').html(this.todoTemplate(this.todos));
+}</code></pre>
+    </div>
+
+    <div id="jquery-ca-marchait" class="step slide" data-x="1000" data-y="-800">
+        <h1 class="title">Avant, on avait JQuery</h1>
+        <h2>Ça marchait très bien !</h2>
+        <iframe src="http://todomvc.com/examples/jquery"></iframe>
+    </div>
+
+    <div id="jquery-mais-non" class="step slide" data-x="0" data-y="0">
+        <h1 class="title">Mais JQuery ...</h1>
+        <ul>
+            <li>N'aide pas à structurer le code</li>
+            <li>Ne fait que de la manipulation DOM et de l'AJAX</li>
+            <li>Provoque souvent du spaghetti code !</li>
+        </ul>
+        <img class="border align-center" src="img/spaghetti-integration-620x360.jpg">
+    </div>
+
+    <div id="angularjs-framework" class="step slide" data-x="0" data-y="800">
+        <h1 class="title">AngularJS, c'est l'anti JQuery</h1>
+        <h2>Framework complet</h2>
+        <ul>
+            <li>Ne dépends pas de JQuery.</li>
+            <li>Permet d'enrichir HTML (directives)</li>
+            <li>Conçu pour consommer une API REST</li>
+            <li>Intègre une gestion de modules</li>
+            <li>Sépare les responsabilités (MVC)</li>
+            <li>Utilise l'injection de dépendance</li>
+            <li>Est facilement testable</li>
+        </ul>
+    </div>
+
+    <div id="angularjs-html" class="step slide" data-x="-1000" data-y="1600">
+        <h1 class="title">Du HTML sous stéroïdes !</h1>
+        <div class="lang">html</div>
+        <pre><code class="html">&lt;header id=&quot;header&quot;&gt;
+    &lt;h1&gt;todos&lt;/h1&gt;
+    &lt;form id=&quot;todo-form&quot; ng-submit=&quot;addTodo()&quot;&gt;
+        &lt;input id=&quot;new-todo&quot; placeholder=&quot;What needs to be done?&quot; ng-model=&quot;newTodo&quot; ng-disabled=&quot;saving&quot; autofocus&gt;
+    &lt;/form&gt;
+&lt;/header&gt;
+    &lt;section id=&quot;main&quot; ng-show=&quot;todos.length&quot; ng-cloak&gt;
+        &lt;input id=&quot;toggle-all&quot; type=&quot;checkbox&quot; ng-model=&quot;allChecked&quot; ng-click=&quot;markAll(allChecked)&quot;&gt;
+        &lt;label for=&quot;toggle-all&quot;&gt;Mark all as complete&lt;/label&gt;
+        &lt;ul id=&quot;todo-list&quot;&gt;
+            &lt;li ng-repeat=&quot;todo in todos | filter:statusFilter track by $index&quot; ng-class=&quot;{completed: todo.completed, editing: todo == editedTodo}&quot;&gt;
+                &lt;div class=&quot;view&quot;&gt;
+                    &lt;input class=&quot;toggle&quot; type=&quot;checkbox&quot; ng-model=&quot;todo.completed&quot; ng-change=&quot;toggleCompleted(todo)&quot;&gt;
+                    &lt;label ng-dblclick=&quot;editTodo(todo)&quot;&gt;{{todo.title}}&lt;/label&gt;
+                    &lt;button class=&quot;destroy&quot; ng-click=&quot;removeTodo(todo)&quot;&gt;&lt;/button&gt;
+                &lt;/div&gt;
+                &lt;form ng-submit=&quot;saveEdits(todo, 'submit')&quot;&gt;
+                    &lt;input class=&quot;edit&quot; ng-trim=&quot;false&quot; ng-model=&quot;todo.title&quot; todo-escape=&quot;revertEdits(todo)&quot; ng-blur=&quot;saveEdits(todo, 'blur')&quot; todo-focus=&quot;todo == editedTodo&quot;&gt;
+                &lt;/form&gt;
+            &lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/section&gt;</code></pre>
+    </div>
+
+    <div id="angularjs-binding" class="step slide" data-x="0" data-y="1600">
+        <h1 class="title">Le binding</h1>
+        <h2>Synchronise automatiquement la vue et le modèle</h2>
+        <div class="lang">html</div>
+        <pre><code ng-non-bindable class="html bigger">&lt;input ng-model=&quot;value&quot;&gt;
+&lt;span class=&quot;small&quot;&gt;{{value}}&lt;/span&gt;</code></pre>
+
+        <div class="lang">demo</div>
+        <input ng-model="value">
+        <span class="small">{{value}}</span>
+
+    </div>
+
+    <div id="angularjs-controller" class="step slide" data-x="1000" data-y="1600" ng-controller="ResetCtrl as ctrl">
+        <h1 class="title">Les controllers</h1>
+        <h2>Le controller contient les données du modèle et publie les fonctions utiles pour la vue.</h2>
+        <div class="lang">html</div>
+        <pre><code ng-non-bindable class="html">&lt;div ng-controller=&quot;ResetCtrl as ctrl&quot;&gt;
+    &lt;input ng-model=&quot;value&quot;&gt;
+    &lt;button ng-click=&quot;ctrl.reset()&quot;&gt;Reset&lt;/button&gt;
+    &lt;span class=&quot;small&quot;&gt;{{ctrl.value}}&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+        <div class="lang">javascript</div>
+        <pre><code class="js">.controller('ResetCtrl', function() {
+    this.value = 'lorem ipsum'; // Mise à jour automatiquement par binding
+
+    this.reset = function() {
+        this.value = '';
+    }
+});</code></pre>
+
+        <div class="lang">demo</div>
+        <input ng-model="ctrl.value">
+        <button ng-click="ctrl.reset()">Reset</button>
+        <span class="small">{{ctrl.value}}</span>
+
+    </div>
+
+    <div id="angularjs-directive" class="step slide" data-x="-1000" data-y="2400" ng-controller="ResetDirectiveCtrl as ctrl">
+        <h1 class="title">Les directives</h1>
+        <h2>Elles encapsulent un modèle, un controlleur, et une vue (template).</h2>
+        <div class="lang">javascript (directive)</div>
+        <pre><code class="js">.directive('resetInput', function() {
+    // Corresponds à l'&eacute;l&eacute;ment &lt;reset-input&gt;&lt;/reset-input&gt;
+    return {
+        restrict: 'E', // tag uniquement
+        scope: { // => modèle
+            label: '@', // attribut
+            value: '=', // expression
+            resetValue: '=?' // expression (optionel)
+        },
+        templateUrl: 'examples/reset.html', // => vue
+        controller: 'ResetDirectiveCtrl', // => controller
+        controllerAs: 'ctrl' // Nom du controleur au sein du template
+    };
+});</code></pre>
+    <div class="lang">examples/reset.html (template)</div>
+    <pre><code class="html">&lt;input ng-model=&quot;ctrl.value&quot;&gt;
+&lt;button ng-click=&quot;ctrl.reset()&quot;&gt;{{label}}&lt;/button&gt;
+&lt;span class="small"&gt;{{ctrl.value}}&lt;/span&gt;
+&lt;!-- ngClick et ngModel sont des directives fournies par AngularJS --&gt;</code></pre>
+    </div>
+
+    <div id="angularjs-directive-2" class="step slide" data-x="0" data-y="2400">
+        <h1 class="title">Les directives</h1>
+        <div class="lang">javascript (controller)</div>
+        <pre><code class="js small">.controller('ResetDirectiveCtrl', function($scope) {
+    // $scope est obtenu par injection de dépendance
+    if (!$scope.value) {
+        $scope.value = 'lorem ipsum';
+    }
+
+    if (!$scope.resetValue) {
+        $scope.resetValue = '';
+    }
+
+    this.value = $scope.value;
+
+    this.reset = function() {
+        this.value = $scope.resetValue;
+    }
+})</code></pre>
+        <div class="lang">index.html</div>
+        <pre><code ng-non-bindable class="html small">&lt;reset-input label=&quot;Click Me!&quot;
+             value=&quot;'C\'est paramétrable'&quot;
+             reset-value=&quot;'Une autre valeur'&quot;&gt;
+&lt;/reset-input&gt;</code></pre>
+
+
+        <div class="lang">demo</div>
+        <reset-input label="Click Me!" value="'C\'est paramétrable'" reset-value="'Une autre valeur'"></reset-input>
+
+    </div>
+
+    <div id="angularjs-directive-3" class="step slide" data-x="1000" data-y="2400">
+        <h1 class="title">Les directives</h1>
+        <h2>Il existe de nombreuses directives intégrées à AngularJS</h2>
+
+        <div class="lang smaller">html</div>
+        <pre><code ng-non-bindable class="html smaller">&lt;div ng-controller=&quot;AngularDirectivesCtrl as ctrl&quot;&gt;
+    &lt;div class=&quot;reset-input-container&quot;
+         <span class="highlight">ng-repeat</span>=&quot;component in ctrl.components&quot;&gt;
+         <span class="highlight">ng-class</span>=&quot;{'component-selected': component == ctrl.selectedComponent, 'hidden': component.hidden}&quot;
+         <span class="highlight">ng-click</span>=&quot;ctrl.handleClick(component)&quot;
+         &lt;reset-input label=&quot;{{component.label}}&quot;
+                      value=&quot;component.value&quot;
+                      <span class="highlight">ng-hide</span>=&quot;component.hidden&quot;&gt;
+         &lt;/reset-input&gt;
+         &lt;span class="big" <span class="highlight">ng-show</span>=&quot;component.hidden&quot;&gt;Composant {{component.label}} masqu&eacute;&lt;/span&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    <div class="lang">javascript</div>
+    <pre><code class="js smaller">.controller('AngularDirectivesCtrl', function() {
+    this.components = [
+        {label: '#1', value: 'Premier', resetValue: 'Le numero 1'},
+        {label: '#2', value: 'Deuxième', resetValue: 'Le numero 2'},
+        {label: '#3', value: 'Troisième', resetValue: 'Le numero 3', hidden: true},
+        {label: '#4', value: 'Quatrième', resetValue: 'Le numero 4'}
+    ];
+
+    this.handleClick = function(component) {
+        // On sélectionne le composant s'il n'est pas déja selectionné, sinon le le déselectionne.
+        this.selectedComponent = component != this.selectedComponent ? component : null;
+    }
+});</code></pre>
+    </div>
+
+    <div id="angularjs-directive-4" class="step slide" data-x="2000" data-y="2400" ng-controller="AngularDirectivesCtrl as ctrl">
+        <h1 class="title">Les directives</h1>
+
+        <div class="lang smaller">css</div>
+        <pre><code ng-non-bindable class="css smaller">.component-selected {
+    border: solid 3px #6388cd;
+}
+
+.component-selected.hidden {
+    border-color: #cccccc;
+}</code></pre>
+
+        <div class="lang smaller">demo</div>
+        <div class="reset-input-container"
+             ng-repeat="component in ctrl.components"
+             ng-class="{'component-selected': component == ctrl.selectedComponent, 'hidden': component.hidden}"
+             ng-click="ctrl.handleClick(component)">
+            <reset-input label="{{component.label}}"
+                         value="component.value"
+                         ng-hide="component.hidden">
+            </reset-input>
+            <span class="big" ng-show="component.hidden">Composant {{component.label}} masqué</span>
         </div>
     </div>
 
@@ -197,7 +398,8 @@
         CSS transfrom docs: https://developer.mozilla.org/en/CSS/transform
 
     -->
-    <div id="overview" class="step" data-x="3000" data-y="1500" data-scale="10">
+
+    <div id="overview" class="step" data-x="0" data-y="-800" data-scale="5">
     </div>
 
 </div>
@@ -250,6 +452,9 @@
     Of course you can wrap it in any kind of "DOM ready" event, but I was too lazy to do so ;)
 
 -->
+<script src="js/angular.js"></script>
+<script src="examples/app.js"></script>
+
 <script src="js/impress-progress.js"></script>
 <script src="js/impress.js"></script>
 <script>impress().init();</script>

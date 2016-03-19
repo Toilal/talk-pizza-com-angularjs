@@ -1,13 +1,39 @@
-.slide#title h1 {
-    font-size: 100px;
-    line-height: 150%;
+.slide {
+    padding: 20px 40px;
+}
+
+h1 {
+    font-size: 48px;
+}
+
+h2 {
+    font-size: 32px;
+}
+
+.title {
     text-align: center;
 }
 
-.slide#title h2 {
-    font-size: 35px;
-    line-height: 150%;
+.subtitle {
     text-align: center;
+}
+
+.align-center {
+    left: 0;
+    right: 0;
+
+    margin: auto;
+    position: absolute;
+}
+
+.border {
+    padding: 4px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+    border: 1px solid rgba(0, 0, 0, .3);
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, .1);
 }
 
 .vertical-center {
@@ -22,12 +48,117 @@
     margin: auto;
 }
 
-.slide {
+.slide#title {
     position: relative;
 }
 
-.slide .footer {
+.slide#title .title {
     position: absolute;
+
+    left: 0;
+    right: 0;
+
+    margin: auto;
+}
+
+.slide#title .footer {
+    position: absolute;
+
+    padding: 12px;
+
     right: 0;
     bottom: 0;
 }
+
+.slide#jquery-ca-marchait iframe {
+    width: 90%;
+    height: 75%;
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+
+    margin: auto;
+}
+
+.smaller {
+    font-size: 12px;
+}
+
+.small {
+    font-size: 16px;
+}
+
+.medium {
+    font-size: 18px;
+}
+
+code {
+    font-size: 18px;
+    font-family: "Monospace";
+
+}
+
+code.hljs {
+    background: #e9ecf0;
+
+    border: solid 1px #6388cd;
+}
+
+.big {
+    font-size: 22px;
+}
+
+.bigger {
+    font-size: 28px;
+}
+
+code span.highlight {
+    font-weight: bold;
+    color: red;
+}
+
+code span.highlight span.hljs-string {
+    color: inherit;
+}
+
+#impress .hljs-tag {
+    background: inherit;
+}
+
+.slide#title ul {
+    list-style: none;
+}
+
+ul {
+    list-style: disc;
+}
+
+li {
+    margin-left: 58px;
+    padding: 4px;
+}
+
+#impress .hljs {
+    padding-top: 8px;
+    padding-bottom: 18px;
+}
+
+.lang {
+    padding-left: 0.75em;
+    font-weight: bolder;
+
+    border-bottom: solid 1px #6388cd;
+
+    color: #6388cd;
+    font-style: oblique;
+
+    font-size: 16px;
+}
+
+small {
+    font-size: 14px;
+}
+
+

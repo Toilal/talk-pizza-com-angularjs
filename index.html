@@ -384,7 +384,7 @@ render: function () {
         </div>
     </div>
 
-    <div id="services-factories-providers" class="step slide" data-x="-1000" data-y="3200">
+    <div id="services-factories-providers" class="step slide" data-x="-2000" data-y="3200">
         <h1 class="title">Services, Factories et Providers</h1>
         <h2>Composants utilisables via l'injection de dépendance</h2>
 
@@ -397,30 +397,246 @@ render: function () {
 
     </div>
 
-    <div id="services-factories-providers-2" class="step slide" data-x="0" data-y="3200">
-        <h1 class="title">Exemple Github Repos</h1>
+    <div id="services-factories-providers-2" class="step slide" data-x="-1000" data-y="3200">
+        <h1 class="title">Exemple: Github Repos</h1>
 
         <github-repos></github-repos>
 
     </div>
 
-    <!--
+    <div id="services-factories-providers-3" class="step slide" data-x="0" data-y="3200">
+        <h1 class="title">Exemple: Github Repos</h1>
 
-        So to summarize of all the possible attributes used to position presentation steps, we have:
+        <div class="lang smaller">javascript (service)</div>
+        <pre><code class="js smaller">.service('GithubApiService', function($http) {
+    // $http est un service angularJS qui permet de réaliser des requetes HTTP.
+    var base = "https://api.github.com/";
 
-        * `data-x`, `data-y`, `data-z` - they define the position of **the center** of step element on
-            the canvas in pixels; their default value is 0;
-        * `data-rotate-x`, `data-rotate-y`, 'data-rotate-z`, `data-rotate` - they define the rotation of
-            the element around given axis in degrees; their default value is 0; `data-rotate` and `data-rotate-z`
-            are exactly the same;
-        * `data-scale` - defines the scale of step element; default value is 1
+    var access_token = "1ab41bc0cf53c79f3240e07bfe1269705e013246";
+    var headers = {
+        'Accept': 'application/vnd.github.v3+json',
+        'Authorization': 'token ' + access_token
+    };
 
-        These values are used by impress.js in CSS transformation functions, so for more information consult
-        CSS transfrom docs: https://developer.mozilla.org/en/CSS/transform
+    this.user = function() {
+        return $http({
+            method: 'GET',
+            headers: headers,
+            url: base + 'user'
+        })
+    };
 
-    -->
+    this.userRepos = function(params) {
+        return $http({
+            method: 'GET',
+            headers: headers,
+            url: base + 'user/repos',
+            params: params
+        })
+    };
 
-    <div id="overview" class="step" data-x="0" data-y="-800" data-scale="5">
+    this.loadLink = function(url, params) {
+        return $http({
+            method: 'GET',
+            headers: headers,
+            url: url,
+            params: params
+        })
+    }
+})</code></pre>
+    </div>
+
+    <div id="services-factories-providers-4" class="step slide" data-x="1000" data-y="3200">
+        <h1 class="title">Exemple: Github Repos</h1>
+
+        <div class="lang smaller">javascript (controller)</div>
+        <pre><code class="js smaller">.controller('GithubReposCtrl', function($scope, $q, GithubApiService) {
+    // On récupère le service GithubApiService par injection de dépendance.
+    var self = this;
+
+    this.refreshing = false;
+
+    this.refresh = function() {
+        self.refreshing = true;
+
+        var p1 = GithubApiService.user().then(function(response) {
+            self.user = response.data;
+            rateUpdater(response); // Rafraichir les compteurs
+        }).catch(errorHandler);
+
+        var p2 = GithubApiService.userRepos($scope.reposParams).then(function(response) {
+            self.repos = response.data;
+            loadNextRepos(response); // Charger l'ensemble des pages
+            rateUpdater(response); // Rafraichir les compteurs
+        }).catch(errorHandler);
+
+        return $q.all([p1, p2]).finally(function() {
+            self.refreshing = false;
+        });
+    };
+
+    this.refresh(); // On rafraichit à l'initialisation du controlleur
+})
+</code></pre>
+
+        <div class="lang smaller">javascript (directive)</div>
+        <pre><code class="js smaller">.directive('githubRepos', function() {
+return {
+    scope: {
+        reposParams: '=?'
+    },
+    templateUrl: 'examples/github-repos.html',
+    controller: 'GithubReposCtrl',
+    controllerAs: 'ctrl'
+    };
+})</code></pre>
+
+
+    </div>
+
+    <div id="services-factories-providers-5" class="step slide" data-x="2000" data-y="3200">
+        <h1 class="title">Exemple: Github Repos</h1>
+
+        <div class="lang smaller">github-repos.html (template)</div>
+        <pre><code ng-non-bindable class="html smaller">&lt;div class=&quot;github-repos&quot;&gt;
+    &lt;div class=&quot;github-title&quot;&gt;
+        &lt;button class=&quot;bigger&quot; ng-click=&quot;ctrl.refresh()&quot; ng-disabled=&quot;ctrl.refreshing&quot;&gt;&lt;i class=&quot;fa fa-refresh&quot;&gt;&lt;/i&gt;&lt;/button&gt;
+        &lt;span ng-if=&quot;ctrl.user&quot;&gt;{{ctrl.user.name}} (&lt;a href=&quot;{{ctrl.user.html_url}}&quot; target=&quot;_blank&quot;&gt;{{ctrl.user.login}}&lt;/a&gt;)
+        &lt;/span&gt;
+        &lt;span class=&quot;small&quot;&gt;Limite: {{ctrl.rate.limit}}&lt;/span&gt;
+        &lt;span class=&quot;small&quot;&gt;Restant: {{ctrl.rate.remaining}}&lt;/span&gt;
+        &lt;i class=&quot;bigger fa fa-spinner&quot; ng-if=&quot;ctrl.refreshing&quot;&gt;&lt;/i&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;github-table-container&quot;&gt;
+        &lt;table class=&quot;github-table&quot;&gt;
+            &lt;thead&gt;
+                &lt;th class=&quot;name&quot;&gt;Name&lt;/th&gt;
+                &lt;th class=&quot;stars&quot;&gt;Stars&lt;/th&gt;
+                &lt;th class=&quot;forks&quot;&gt;Forks&lt;/th&gt;
+            &lt;/thead&gt;
+            &lt;tbody&gt;
+                &lt;tr ng-repeat=&quot;repo in ctrl.repos | orderBy:'-stargazers_count' | filter:{fork:false}&quot;&gt;
+                    &lt;td class=&quot;name&quot; tooltips tooltip-side=&quot;'left'&quot; tooltip-template=&quot;{{repo.description}}&quot;&gt;
+                        &lt;a href=&quot;{{repo.html_url}}&quot; target=&quot;_blank&quot;&gt;{{repo.full_name}}&lt;/a&gt;
+                    &lt;/td&gt;
+                    &lt;td class=&quot;stars&quot;&gt;{{repo.stargazers_count}}&lt;/td&gt;
+                    &lt;td class=&quot;forks&quot;&gt;{{repo.forks_count}}&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;/tbody&gt;
+        &lt;/table&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+        <div class="lang smaller">html</div>
+        <pre><code class="html smaller">&lt;github-repos&gt;&lt;/github-repos&gt;</code></pre>
+
+    </div>
+
+    <div id="beaucoup-d-autres-choses" class="step slide" data-x="0" data-y="4000">
+        <h1 class="title">Beaucoup d'autres choses</h1>
+
+        <ul>
+            <li>Modules pour organiser son code et charger des dépendances externes (bower, npm)</li>
+            <li>Routeur pour assurer la navigation au sein de l'application</li>
+            <li>Tests unitaires (karma, jasmine)</li>
+            <li>Protractor = Tests IHM (Selenium)</li>
+        </ul>
+    </div>
+
+    <div id="communaute" class="step slide" data-x="1000" data-y="4000">
+        <h1 class="title">Et encore d'autres (merci Github)</h1>
+
+        <ul>
+            <li><a href="https://github.com/Swiip/generator-gulp-angular" target="_blank">generator-gulp-angular</a>: squelette Yeoman pour démarrer rapidement.</li>
+            <li><a href="https://angular-ui.github.io/bootstrap/" target="_blank">ui-bootstrap</a>: Intégration des composants bootstrap</li>
+            <li><a href="https://material.angularjs.org/latest/" target="_blank">angular-material</a>: Implémentation Material Design</li>
+            <li><a href="https://github.com/sahat/satellizer" target="_blank">satellizer</a>: Authentification O-Auth en 5 minutes (Facebook, Twitter, Github, etc ...)</li>
+            <li><a href="https://github.com/angular-translate/angular-translate" target="_blank">angular-translate</a>: Votre application en plusieurs langues</li>
+        </ul>
+    </div>
+
+    <div id="angularjs-pas-parfait" class="step slide" data-x="-1000" data-y="4800">
+        <h1 class="title">AngularJS n'est pas parfait</h1>
+
+        <ul>
+            <li>Le binding cause des problèmes de performance (Dirty Checking, Digest Loop)</li>
+            <li>Il faut limiter la quantité de données reliées à la vue</li>
+            <li>On doit parfois "éviter le framework".</li>
+            <li>Ne supporte pas ES2015</li>
+            <li>Pas de Virtual DOM</li>
+            <li>Le routeur intégré, peu pratique, est souvent remplacé par un module tiers (UI Router)</li>
+            <li>La migration vers Angular 2 n'est pas évidente</li>
+        </ul>
+
+        <p><a href="https://github.com/angular-gantt/angular-gantt/issues/597" target="_blank">Exemple d'un problème de performance avec Angular Gantt</a></p>
+    </div>
+
+    <div id="aurelia-js" class="step slide" data-x="0" data-y="4800">
+        <h1 class="title">AureliaJS</h1>
+
+        <ul>
+            <li>Supporte les languages de demain (ES2015, ES2016, TypeScript)</li>
+            <li>Zoning pour le dirty checking</li>
+            <li>Architecture par module (Chaque fonctionnalité du framework est optionelle et remplaçable)</li>
+            <li>Choix possible de l'implémentation du binding (Proxy)</li>
+        </ul>
+
+    </div>
+
+    <div id="react-js" class="step slide" data-x="1000" data-y="4800">
+        <h1 class="title">ReactJS</h1>
+
+        <ul>
+            <li>Du virtual DOM (optimise les changements sur le DOM)</li>
+            <li>Très efficace pour construire des composants graphiques</li>
+            <li>On met du HTML dans le JS (avec JSX)</li>
+            <li>Librairie légère, mais moins complète</li>
+        </ul>
+
+    </div>
+
+    <div id="angular-2" class="step slide" data-x="0" data-y="5600">
+        <h1 class="title">Angular2</h1>
+
+        <ul>
+            <li>TypeScript (ou ES2015)</li>
+            <li>Orienté Web Components</li>
+            <li>Plus de dirty checking</li>
+            <li>Exploite les streams observables <a href="http://reactivex.io/">RxJS</a> (Reactive Programming)</li>
+            <li>Injection de dépendance digne d'un environnement backend</li>
+            <li>Moins de concepts différents (mais plus puissant)</li>
+            <li>Disponible en beta</li>
+        </ul>
+
+    </div>
+
+    <div id="preparez-vous-changements" class="step slide" data-x="1000" data-y="5600">
+
+        <h2>Préparez-vous aux changements* !</h2>
+
+        <div class="lang smaller">javascript (service)</div>
+        <pre><code class="js">import {Injectable} from "angular2/core"
+import {Http} from 'angular2/http';
+import 'rxjs/Rx'
+
+@Injectable()
+export class CountryService{
+    endpoint_url:String = "https://restcountries.eu/rest/v1/region/";
+
+    constructor(http: Http){
+        this.http = http;
+    }
+
+    getCountriesByRegion (region:String){
+        return this.http.get(this.endpoint_url + region).map(res => res.json());
+    }
+}</code></pre>
+
+        <small>*AngularJS n'était que le début de grands changements pour le développement web. Il faut suivre ...</small>
+
+    </div>
+
+    <div id="overview" class="step" data-x="0" data-y="2300" data-scale="12">
     </div>
 
 </div>

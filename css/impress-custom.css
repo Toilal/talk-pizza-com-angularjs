@@ -82,6 +82,18 @@ h2 {
     margin: auto;
 }
 
+.slide#issue-angular-gantt iframe {
+    width: 100%;
+    height: 100%;
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+
+    margin: auto;
+}
+
 .smaller {
     font-size: 12px;
 }

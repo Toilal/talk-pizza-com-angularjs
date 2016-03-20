@@ -145,7 +145,7 @@ angular.module('Examples')
                 rateUpdater(response);
             }).catch(errorHandler);
 
-            var p2 = GithubApiService.userRepos(this.reposParams).then(function(response) {
+            var p2 = GithubApiService.userRepos($scope.reposParams).then(function(response) {
                 self.repos = response.data;
                 loadNextRepos(response);
                 rateUpdater(response);

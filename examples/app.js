@@ -196,8 +196,6 @@ angular.module('Examples')
 
             return links;
         };
-
-        this.refresh(); // On rafraichit a l'initalisation du controlleur
     })
 
     .directive('githubRepos', function() {

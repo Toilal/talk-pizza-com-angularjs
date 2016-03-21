@@ -61,12 +61,21 @@ h2 {
     margin: auto;
 }
 
-.slide#title .footer {
+.slide .footer-right {
     position: absolute;
 
     padding: 12px;
 
     right: 0;
+    bottom: 0;
+}
+
+.slide .footer-left {
+    position: absolute;
+
+    padding: 12px;
+
+    left: 0;
     bottom: 0;
 }
 

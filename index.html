@@ -114,11 +114,21 @@
         It will not be rotated or scaled.
 
     -->
+    <div id="overview-start" class="step" data-x="0" data-y="2300" data-scale="12">
+    </div>
+
     <div id="title" class="step slide" data-x="0" data-y="-1600">
         <img class="title" src="img/AngularJS_logo.svg">
-        <h2 class="subtitle vertical-center">Retour d'expérience sur le plus populaire des frameworks web</h2>
+        <h2 class="subtitle vertical-center">Pourquoi est-il si populaire ?</h2>
 
-        <div class="footer">
+        <div class="footer-left">
+            <ul>
+                <li><i class="fa fa-user"></i> Rémi Alvergnat</li>
+                <li><i class="fa fa-users"></i> GFI Informatique (Orléans)</a></li>
+                <li><i class="fa fa-calendar"></i> 22/03/2016</li>
+            </ul>
+        </div>
+        <div class="footer-right">
             <ul>
                 <li><i class="fa fa-twitter"></i> <a href="https://twitter.com/Toilal">@Toilal</a></li>
                 <li><i class="fa fa-github"></i> <a href="https://github.com/Toilal">Toilal</a></li>
@@ -196,40 +206,46 @@ render: function () {
         <h2>Framework complet</h2>
         <ul>
             <li>Ne dépends pas de JQuery.</li>
-            <li>Permet d'enrichir HTML (directives)</li>
+            <li>Paradigme Model-View-Controler (MVC)</li>
+            <li>Permet d'enrichir HTML avec des balises au comportement spécifique</li>
             <li>Conçu pour consommer une API REST</li>
-            <li>Intègre une gestion de modules</li>
-            <li>Sépare les responsabilités (MVC)</li>
             <li>Utilise l'injection de dépendance</li>
-            <li>Est facilement testable</li>
+            <li>Pensé pour les tests</li>
         </ul>
     </div>
 
     <div id="angularjs-html" class="step slide" data-x="-1000" data-y="1600">
         <h1 class="title">Du HTML sous stéroïdes !</h1>
         <div class="lang">html</div>
-        <pre><code class="html">&lt;header id=&quot;header&quot;&gt;
-    &lt;h1&gt;todos&lt;/h1&gt;
-    &lt;form id=&quot;todo-form&quot; ng-submit=&quot;addTodo()&quot;&gt;
-        &lt;input id=&quot;new-todo&quot; placeholder=&quot;What needs to be done?&quot; ng-model=&quot;newTodo&quot; ng-disabled=&quot;saving&quot; autofocus&gt;
-    &lt;/form&gt;
+        <pre><code class="html small">&lt;header id=&quot;header&quot;&gt;
+  &lt;h1&gt;todos&lt;/h1&gt;
+  &lt;form id=&quot;todo-form&quot; ng-submit=&quot;addTodo()&quot;&gt;
+    &lt;input id=&quot;new-todo&quot; placeholder=&quot;What needs to be done?&quot;
+            ng-model=&quot;newTodo&quot; ng-disabled=&quot;saving&quot; autofocus&gt;
+  &lt;/form&gt;
 &lt;/header&gt;
-    &lt;section id=&quot;main&quot; ng-show=&quot;todos.length&quot; ng-cloak&gt;
-        &lt;input id=&quot;toggle-all&quot; type=&quot;checkbox&quot; ng-model=&quot;allChecked&quot; ng-click=&quot;markAll(allChecked)&quot;&gt;
-        &lt;label for=&quot;toggle-all&quot;&gt;Mark all as complete&lt;/label&gt;
-        &lt;ul id=&quot;todo-list&quot;&gt;
-            &lt;li ng-repeat=&quot;todo in todos | filter:statusFilter track by $index&quot; ng-class=&quot;{completed: todo.completed, editing: todo == editedTodo}&quot;&gt;
-                &lt;div class=&quot;view&quot;&gt;
-                    &lt;input class=&quot;toggle&quot; type=&quot;checkbox&quot; ng-model=&quot;todo.completed&quot; ng-change=&quot;toggleCompleted(todo)&quot;&gt;
-                    &lt;label ng-dblclick=&quot;editTodo(todo)&quot;&gt;{{todo.title}}&lt;/label&gt;
-                    &lt;button class=&quot;destroy&quot; ng-click=&quot;removeTodo(todo)&quot;&gt;&lt;/button&gt;
-                &lt;/div&gt;
-                &lt;form ng-submit=&quot;saveEdits(todo, 'submit')&quot;&gt;
-                    &lt;input class=&quot;edit&quot; ng-trim=&quot;false&quot; ng-model=&quot;todo.title&quot; todo-escape=&quot;revertEdits(todo)&quot; ng-blur=&quot;saveEdits(todo, 'blur')&quot; todo-focus=&quot;todo == editedTodo&quot;&gt;
-                &lt;/form&gt;
-            &lt;/li&gt;
-        &lt;/ul&gt;
-    &lt;/section&gt;</code></pre>
+  &lt;section id=&quot;main&quot; ng-show=&quot;todos.length&quot; ng-cloak&gt;
+    &lt;input id=&quot;toggle-all&quot; type=&quot;checkbox&quot;
+            ng-model=&quot;allChecked&quot; ng-click=&quot;markAll(allChecked)&quot;&gt;
+    &lt;label for=&quot;toggle-all&quot;&gt;Mark all as complete&lt;/label&gt;
+    &lt;ul id=&quot;todo-list&quot;&gt;
+      &lt;li ng-repeat=&quot;todo in todos | filter:statusFilter track by $index&quot;
+          ng-class=&quot;{completed: todo.completed, editing: todo == editedTodo}&quot;&gt;
+        &lt;div class=&quot;view&quot;&gt;
+          &lt;input class=&quot;toggle&quot; type=&quot;checkbox&quot;
+                 ng-model=&quot;todo.completed&quot; ng-change=&quot;toggleCompleted(todo)&quot;&gt;
+          &lt;label ng-dblclick=&quot;editTodo(todo)&quot;&gt;{{todo.title}}&lt;/label&gt;
+          &lt;button class=&quot;destroy&quot; ng-click=&quot;removeTodo(todo)&quot;&gt;&lt;/button&gt;
+        &lt;/div&gt;
+        &lt;form ng-submit=&quot;saveEdits(todo, 'submit')&quot;&gt;
+          &lt;input class=&quot;edit&quot; ng-trim=&quot;false&quot; ng-model=&quot;todo.title&quot;
+                 todo-escape=&quot;revertEdits(todo)&quot;
+                 ng-blur=&quot;saveEdits(todo, 'blur')&quot;
+                 todo-focus=&quot;todo == editedTodo&quot;&gt;
+        &lt;/form&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/section&gt;</code></pre>
     </div>
 
     <div id="angularjs-binding" class="step slide" data-x="0" data-y="1600">
@@ -248,12 +264,6 @@ render: function () {
     <div id="angularjs-controller" class="step slide" data-x="1000" data-y="1600" ng-controller="ResetCtrl as ctrl">
         <h1 class="title">Les controllers</h1>
         <h2>Le controller contient les données du modèle et publie les fonctions utiles pour la vue.</h2>
-        <div class="lang">html</div>
-        <pre><code ng-non-bindable class="html">&lt;div ng-controller=&quot;ResetCtrl as ctrl&quot;&gt;
-    &lt;input ng-model=&quot;value&quot;&gt;
-    &lt;button ng-click=&quot;ctrl.reset()&quot;&gt;Reset&lt;/button&gt;
-    &lt;span class=&quot;small&quot;&gt;{{ctrl.value}}&lt;/span&gt;
-&lt;/div&gt;</code></pre>
         <div class="lang">javascript</div>
         <pre><code class="js">.controller('ResetCtrl', function() {
     this.value = 'lorem ipsum'; // Mise à jour automatiquement par binding
@@ -262,6 +272,13 @@ render: function () {
         this.value = '';
     }
 });</code></pre>
+        <div class="lang">html</div>
+        <pre><code ng-non-bindable class="html">&lt;div ng-controller=&quot;ResetCtrl as ctrl&quot;&gt;
+    &lt;input ng-model=&quot;value&quot;&gt;
+    &lt;button ng-click=&quot;ctrl.reset()&quot;&gt;Reset&lt;/button&gt;
+    &lt;span class=&quot;small&quot;&gt;{{ctrl.value}}&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+
 
         <div class="lang">demo</div>
         <input ng-model="ctrl.value">
@@ -330,6 +347,21 @@ render: function () {
         <h1 class="title">Les directives</h1>
         <h2>Il existe de nombreuses directives intégrées à AngularJS</h2>
 
+        <div class="lang">javascript</div>
+        <pre><code class="js smaller">.controller('AngularDirectivesCtrl', function() {
+    this.components = [
+        {label: '#1', value: 'Premier', resetValue: 'Le numero 1'},
+        {label: '#2', value: 'Deuxième', resetValue: 'Le numero 2'},
+        {label: '#3', value: 'Troisième', resetValue: 'Le numero 3', hidden: true},
+        {label: '#4', value: 'Quatrième', resetValue: 'Le numero 4'}
+    ];
+
+    this.handleClick = function(component) {
+        // On sélectionne le composant s'il n'est pas déja selectionné, sinon le le déselectionne.
+        this.selectedComponent = component != this.selectedComponent ? component : null;
+    }
+});</code></pre>
+
         <div class="lang smaller">html</div>
         <pre><code ng-non-bindable class="html smaller">&lt;div ng-controller=&quot;AngularDirectivesCtrl as ctrl&quot;&gt;
     &lt;div class=&quot;reset-input-container&quot;
@@ -343,20 +375,7 @@ render: function () {
          &lt;span class="big" <span class="highlight">ng-show</span>=&quot;component.hidden&quot;&gt;Composant {{component.label}} masqu&eacute;&lt;/span&gt;
     &lt;/div&gt;
 &lt;/div&gt;</code></pre>
-    <div class="lang">javascript</div>
-    <pre><code class="js smaller">.controller('AngularDirectivesCtrl', function() {
-    this.components = [
-        {label: '#1', value: 'Premier', resetValue: 'Le numero 1'},
-        {label: '#2', value: 'Deuxième', resetValue: 'Le numero 2'},
-        {label: '#3', value: 'Troisième', resetValue: 'Le numero 3', hidden: true},
-        {label: '#4', value: 'Quatrième', resetValue: 'Le numero 4'}
-    ];
 
-    this.handleClick = function(component) {
-        // On sélectionne le composant s'il n'est pas déja selectionné, sinon le le déselectionne.
-        this.selectedComponent = component != this.selectedComponent ? component : null;
-    }
-});</code></pre>
     </div>
 
     <div id="angularjs-directive-4" class="step slide" data-x="2000" data-y="2400" ng-controller="AngularDirectivesCtrl as ctrl">
@@ -386,13 +405,13 @@ render: function () {
 
     <div id="services-factories-providers" class="step slide" data-x="-2000" data-y="3200">
         <h1 class="title">Services, Factories et Providers</h1>
-        <h2>Composants utilisables via l'injection de dépendance</h2>
+        <h2>Composants enregistrées dans l'application</h2>
 
         <ul>
-            <li>Ces concepts permettent de palier à l'absence de classes en JavaScript</li>
-            <li>Equivalent Spring/Jersey en Java</li>
-            <li>Structure fortemment le code en séparant les responsabilités</li>
-            <li>Permet le remplacement des implémentations par des mocks pour les tests (angular-mocks)</li>
+            <li>Disponibles par injection de dépendance</li>
+            <li>Palier à l'absence de classes en JavaScript</li>
+            <li>Structure le code en séparant les responsabilités</li>
+            <li>Permet le bouchonnage pour les tests (angular-mocks)</li>
         </ul>
 
     </div>
@@ -474,8 +493,6 @@ render: function () {
             self.refreshing = false;
         });
     };
-
-    this.refresh(); // On rafraichit à l'initialisation du controlleur
 })
 </code></pre>
 
@@ -536,7 +553,7 @@ return {
         <h1 class="title">Beaucoup d'autres choses</h1>
 
         <ul>
-            <li>Modules pour organiser son code et charger des dépendances externes (bower, npm)</li>
+            <li>Modules pour organiser son code et charger des dépendances externes (bower, browserify)</li>
             <li>Routeur pour assurer la navigation au sein de l'application</li>
             <li>Tests unitaires (karma, jasmine)</li>
             <li>Protractor = Tests IHM (Selenium)</li>
@@ -550,8 +567,10 @@ return {
             <li><a href="https://github.com/Swiip/generator-gulp-angular" target="_blank">generator-gulp-angular</a>: squelette Yeoman pour démarrer rapidement.</li>
             <li><a href="https://angular-ui.github.io/bootstrap/" target="_blank">ui-bootstrap</a>: Intégration des composants bootstrap</li>
             <li><a href="https://material.angularjs.org/latest/" target="_blank">angular-material</a>: Implémentation Material Design</li>
-            <li><a href="https://github.com/sahat/satellizer" target="_blank">satellizer</a>: Authentification O-Auth en 5 minutes (Facebook, Twitter, Github, etc ...)</li>
-            <li><a href="https://github.com/angular-translate/angular-translate" target="_blank">angular-translate</a>: Votre application en plusieurs langues</li>
+            <li><a href="https://github.com/sahat/satellizer" target="_blank">satellizer</a>: Authentification O-Auth (Facebook, Twitter, Github, etc ...)</li>
+            <li><a href="https://github.com/angular-translate/angular-translate" target="_blank">angular-translate</a>: Traduction de l'application</li>
+            <li><a href="https://github.com/angular-ui-tree/angular-ui-tree" target="_blank">angular-ui-tree</a>: Composant pour arborescence</li>
+            <li><a href="https://github.com/angular-gantt/angular-gantt" target="_blank">angular-gantt</a>: Composant pour planning gantt</li>
         </ul>
     </div>
 
@@ -561,7 +580,7 @@ return {
         <ul>
             <li>Le binding cause des problèmes de performance (Dirty Checking, Digest Loop)</li>
             <li>Il faut limiter la quantité de données reliées à la vue</li>
-            <li>On doit parfois "éviter le framework".</li>
+            <li>On doit parfois "contourner le framework".</li>
             <li>Ne supporte pas ES2015</li>
             <li>Pas de Virtual DOM</li>
             <li>Le routeur intégré, peu pratique, est souvent remplacé par un module tiers (UI Router)</li>
@@ -575,9 +594,10 @@ return {
         <h1 class="title">AureliaJS</h1>
 
         <ul>
-            <li>Supporte les languages de demain (ES2015, ES2016, TypeScript)</li>
+            <li>Supporte les langages de demain (ES2015, ES2016, TypeScript)</li>
             <li>Zoning pour le dirty checking</li>
-            <li>Architecture par module (Chaque fonctionnalité du framework est optionelle et remplaçable)</li>
+            <li>Architecture modulaire</li>
+            <li>Chaque fonctionnalité du framework est optionelle et remplaçable</li>
             <li>Choix possible de l'implémentation du binding (Proxy)</li>
         </ul>
 
@@ -587,10 +607,9 @@ return {
         <h1 class="title">ReactJS</h1>
 
         <ul>
-            <li>Du virtual DOM (optimise les changements sur le DOM)</li>
+            <li>Virtual DOM (optimise les changements du DOM)</li>
             <li>Très efficace pour construire des composants graphiques</li>
-            <li>On met du HTML dans le JS (avec JSX)</li>
-            <li>Librairie légère, mais moins complète</li>
+            <li>Léger mais moins complet</li>
         </ul>
 
     </div>
@@ -612,10 +631,54 @@ return {
 
     <div id="preparez-vous-changements" class="step slide" data-x="1000" data-y="5600">
 
-        <h2>Préparez-vous aux changements* !</h2>
+        <h1>Préparez-vous aux changements !</h1>
+
+        <h2>Un peu de code Angular2 pour finir</h2>
+
+        <div class="lang smaller">javascript (component)</div>
+        <pre><code class="js small">import {Component} from 'angular2/core';
+import {CountryService} from './service/country.service'
+
+@Component({
+    selector: 'app-component',
+    templateUrl: 'src/app.component.tpl.html',
+    providers: [CountryService]
+})
+export class AppComponent {
+    constructor(private _countryService: CountryService){
+        this._countryService = _countryService;
+    }
+
+    getCountriesByRegion(){
+        this.error = "";
+        this.countries = [];
+        this._countryService.getCountriesByRegion(this.region).subscribe(
+            data => this.countries = data,
+            error => this.error = "Region " + this.region + " is invalid."
+        );
+    }
+}</code></pre>
+        </div>
+
+    <div id="preparez-vous-changements-2" class="step slide" data-x="2000" data-y="5600">
+
+        <h1>Préparez-vous aux changements !</h1>
+
+
+        <div class="lang smaller">html (template)</div>
+<pre><code class="html small">&lt;form (ngSubmit)=&quot;getCountriesByRegion()&quot;&gt;
+    &lt;label&gt;Region:&lt;/label&gt;
+    &lt;input type=&quot;text&quot; [(ngModel)]=&quot;region&quot; required&gt;
+    &lt;button type=&quot;submit&quot;&gt;Search&lt;/button&gt;
+&lt;/form&gt;
+    &lt;hr&gt;
+    &lt;p style=&quot;color:red&quot;&gt;&lt;/p&gt;
+    &lt;h1&gt;Countries in &lt;/h1&gt;
+    &lt;div *ngFor=&quot;#country of countries&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
 
         <div class="lang smaller">javascript (service)</div>
-        <pre><code class="js">import {Injectable} from "angular2/core"
+        <pre><code class="js small">import {Injectable} from "angular2/core"
 import {Http} from 'angular2/http';
 import 'rxjs/Rx'
 
@@ -632,11 +695,10 @@ export class CountryService{
     }
 }</code></pre>
 
-        <small>*AngularJS n'était que le début de grands changements pour le développement web. Il faut suivre ...</small>
-
     </div>
 
-    <div id="overview" class="step" data-x="0" data-y="2300" data-scale="12">
+
+    <div id="overview-end" class="step" data-x="0" data-y="2300" data-scale="12">
     </div>
 
 </div>
